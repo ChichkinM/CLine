@@ -1,0 +1,7 @@
+*.o
+moc*
+*.user
+qrc_qml.cpp
+*.stash
+Makefile
+QmlCustomLine
