@@ -101,12 +101,14 @@ void CLine::resizeByPoints() {
         preWidth = pointMaxX_->x() - pointMinX_->x() + penWidth();
     }
 
-    x_ = preX;
-    y_ = preY;
-    height_ = preHeight;
-    width_ = preWidth;
+    if (preX != x_ || preY != y_ || preHeight != height_ || preWidth != width_) {
+        x_ = preX;
+        y_ = preY;
+        height_ = preHeight;
+        width_ = preWidth;
 
-    updateSize();
+        updateSize();
+    }
 }
 
 void CLine::setPointsForResize() {
@@ -127,17 +129,22 @@ void CLine::setPointsForResize() {
     }
 
     if (!pointSignalsIsConnectToSlots_) {
-        connect(pointMaxX_, SIGNAL(xChanged(int)), this, SLOT(update()));
-        connect(pointMaxY_, SIGNAL(yChanged(int)), this, SLOT(update()));
-        connect(pointMinX_, SIGNAL(xChanged(int)), this, SLOT(update()));
-        connect(pointMinY_, SIGNAL(yChanged(int)), this, SLOT(update()));
+        connect(pointMaxX_, SIGNAL(xChanged(int)), this, SLOT(resize()));
+        connect(pointMaxY_, SIGNAL(yChanged(int)), this, SLOT(resize()));
+        connect(pointMinX_, SIGNAL(xChanged(int)), this, SLOT(resize()));
+        connect(pointMinY_, SIGNAL(yChanged(int)), this, SLOT(resize()));
         pointSignalsIsConnectToSlots_ = true;
     }
 }
 
-void CLine::paint(QPainter *painter) {
+void CLine::resize() {
     setPointsForResize();
     resizeByPoints();
+}
+
+void CLine::paint(QPainter *painter) {
+     if (!pointSignalsIsConnectToSlots_)
+         resize();
 
     CGuiPoint *newStart = correctPosition(m_points.at(0), m_points.at(1));
     CGuiPoint *newEnd = correctPosition(m_points.at(m_points.count() - 1), m_points.at(m_points.count() - 2));

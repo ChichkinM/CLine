@@ -77,9 +77,11 @@ private:
 
     bool pointSignalsIsConnectToSlots_ = false;
 
-private slots:
     void resizeByPoints();
     void setPointsForResize();
+
+private slots:    
+    void resize();
 };
 
 #endif // LINE_H
