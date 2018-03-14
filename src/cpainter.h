@@ -1,5 +1,5 @@
-#ifndef PAINTER_H
-#define PAINTER_H
+#ifndef CPAINTER_H
+#define CPAINTER_H
 
 #include <QQuickPaintedItem>
 #include <QPainter>
@@ -50,4 +50,4 @@ protected:
 
 };
 
-#endif // PAINTER_H
+#endif // CPAINTER_H

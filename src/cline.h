@@ -1,5 +1,5 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef CLINE_H
+#define CLINE_H
 
 #include "cpainter.h"
 
@@ -84,4 +84,4 @@ private slots:
     void resize();
 };
 
-#endif // LINE_H
+#endif // CLINE_H
