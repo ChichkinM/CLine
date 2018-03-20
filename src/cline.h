@@ -45,7 +45,7 @@ public:
     CGuiPoint *point(int index) const;
 
     enum ClipType { NO_CLIP = 1, CLIP_TOP = 2, CLIP_BOTTOM = 4, CLIP_RIGHT = 8, CLIP_LEFT = 16 };
-    Q_ENUM(ClipType)
+    Q_ENUMS(ClipType)
 
     void setClipType(int newClipType) { m_clipType = newClipType; }
     int clipType() { return m_clipType; }
