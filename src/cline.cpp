@@ -78,20 +78,20 @@ void CLine::resizeByPoints() {
 
     if (m_clipType & CLIP_TOP) {
         preY = pointMinY_->y();
-        preHeight = pointMaxY_->y() - pointMinY_->y() + penWidth() / 2;
+        preHeight = pointMaxY_->y() - pointMinY_->y() + ceil((double)penWidth() / 2);
     }
 
     if (m_clipType & CLIP_LEFT) {
         preX = pointMinX_->x();
-        preWidth = pointMaxX_->x() - pointMinX_->x() + penWidth() / 2;
+        preWidth = pointMaxX_->x() - pointMinX_->x() + ceil((double)penWidth() / 2);
     }
 
     if (m_clipType & CLIP_BOTTOM) {
-        preHeight -= penWidth() / 2;
+        preHeight -= ceil((double)penWidth() / 2);
     }
 
     if (m_clipType & CLIP_RIGHT) {
-        preWidth -= penWidth() / 2;
+        preWidth -= ceil((double)penWidth() / 2);
     }
 
     if (m_clipType & NO_CLIP) {

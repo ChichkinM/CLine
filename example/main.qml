@@ -125,8 +125,10 @@ Window {
 
 
     CLine {
-        color: "coral"
+        color: "lightblue"
         penWidth: 15
+
+        clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
         points: [
             CPoint { x: bigRecOne.x + bigRecOne.width; y: rectangle.y + 200 },
@@ -135,8 +137,10 @@ Window {
     }
 
     CLine {
-        color: "coral"
+        color: "lightblue"
         penWidth: 15
+
+        clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
         points: [
             CPoint { x: bigRecTwo.x; y: rectangle.y + 300 },
@@ -145,8 +149,10 @@ Window {
     }
 
     CLine {
-        color: "coral"
+        color: "lightblue"
         penWidth: 15
+
+        clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
         points: [
             CPoint { x: bigRecOne.x; y: rectangle.y + 250 },
@@ -157,8 +163,10 @@ Window {
 
 
     CLine {
-        color: "coral"
+        color: "lightcoral"
         penWidth: 15
+
+        clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
         points: [
             CPoint { x: bigRecThree.x + 50; y: bigRecThree.y + bigRecThree.height },
@@ -167,8 +175,10 @@ Window {
     }
 
     CLine {
-        color: "coral"
+        color: "lightcoral"
         penWidth: 15
+
+        clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
         points: [
             CPoint { x: bigRecThree.x + 100; y: bigRecFore.y },
@@ -177,8 +187,10 @@ Window {
     }
 
     CLine {
-        color: "coral"
+        color: "lightcoral"
         penWidth: 15
+
+        clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
         points: [
             CPoint { x: bigRecThree.x + 75; y: bigRecThree.y },
