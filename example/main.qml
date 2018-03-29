@@ -19,11 +19,11 @@ Window {
         repeat: true
         onTriggered:
             if (flag) {
-                line_1.color = "blue"
+                lineOne.color = "blue"
                 flag = false
             }
             else {
-                line_1.color = "darkblue"
+                lineOne.color = "darkblue"
                 flag = true
             }
 
@@ -31,7 +31,7 @@ Window {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: rec_1.x += 1
+        onClicked: recOne.x += 1
     }
 
     Rectangle {
@@ -43,7 +43,43 @@ Window {
     }
 
     Rectangle {
-        id: rec_1
+        id: bigRecOne
+        width: 200
+        height: rectangle.height
+        y: rectangle.y
+        x: Math.round(rectangle.width * 0.25)
+        border.width: 1
+    }
+
+    Rectangle {
+        id: bigRecTwo
+        width: 200
+        height: rectangle.height
+        y: rectangle.y
+        x: Math.round(rectangle.width * 0.75)
+        border.width: 1
+    }
+
+    Rectangle {
+        id: bigRecThree
+        width: bigRecTwo.x - bigRecOne.x - bigRecOne.width
+        height: 100
+        y: Math.round(rectangle.y + rectangle.height * 0.2 - height)
+        x: bigRecOne.x + bigRecOne.width
+        border.width: 1
+    }
+
+    Rectangle {
+        id: bigRecFore
+        width: bigRecTwo.x - bigRecOne.x - bigRecOne.width
+        height: 100
+        y: Math.round(rectangle.y + rectangle.height * 0.8)
+        x: bigRecOne.x + bigRecOne.width
+        border.width: 1
+    }
+
+    Rectangle {
+        id: recOne
         x: 150
         y: 150
         width: Math.round(50)
@@ -51,26 +87,27 @@ Window {
         color: "lightgreen"
     }
 
-
     Rectangle {
-        id: rec_2
-        x: parent.width / 2
-        y: 400
+        id: recTwo
+        x: parent.width / 5
+        y: 500
         width: Math.round(50)
         height: Math.round(50)
         color: "lightgreen"
     }
 
+
+
     CLine {
-        id: line_1
+        id: lineOne
         color: "black"
         penWidth: 10
 
         clipType: CLine.CLIP_LEFT | CLine.CLIP_TOP | CLine.CLIP_BOTTOM
 
         points: [
-            CPoint { x: rec_1.x ; y: rec_1.y },
-            CPoint { x: rec_2.x; y: rec_2.y }
+            CPoint { x: recOne.x ; y: recOne.y },
+            CPoint { x: recTwo.x; y: recTwo.y }
         ]
     }
 
@@ -85,6 +122,72 @@ Window {
         ]
     }
 
+
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecOne.x + bigRecOne.width; y: rectangle.y + 200 },
+            CPoint { x: bigRecTwo.x; y: rectangle.y + 200 }
+        ]
+    }
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecTwo.x; y: rectangle.y + 300 },
+            CPoint { x: bigRecOne.x + bigRecOne.width; y: rectangle.y + 300 }
+        ]
+    }
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecOne.x; y: rectangle.y + 250 },
+            CPoint { x: bigRecOne.x + bigRecOne.width; y: rectangle.y + 250 }
+        ]
+    }
+
+
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecThree.x + 50; y: bigRecThree.y + bigRecThree.height },
+            CPoint { x: bigRecThree.x + 50; y: bigRecFore.y }
+        ]
+    }
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecThree.x + 100; y: bigRecFore.y },
+            CPoint { x: bigRecThree.x + 100; y: bigRecThree.y + bigRecThree.height }
+        ]
+    }
+
+    CLine {
+        color: "coral"
+        penWidth: 15
+
+        points: [
+            CPoint { x: bigRecThree.x + 75; y: bigRecThree.y },
+            CPoint { x: bigRecThree.x + 75; y: bigRecThree.y + bigRecThree.height }
+        ]
+    }
+
+
+
     CLine {
         penWidth: 10
 
@@ -92,8 +195,8 @@ Window {
 
         points: [
             CPoint { x: rectangle.x + rectangle.width; y: rectangle.y + rectangle.height},
-            CPoint { x: rectangle.x + rectangle.width / 2 + 100; y: rectangle.y + rectangle.height * 0.75 },
-            CPoint { x: rectangle.x + rectangle.width / 2 + 100; y: rectangle.y + rectangle.height * 0.25},
+            CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.75 },
+            CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.25},
             CPoint { x: rectangle.x + rectangle.width; y: rectangle.y  }
         ]
     }

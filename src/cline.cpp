@@ -38,19 +38,19 @@ CGuiPoint *CLine::correctPosition(const CGuiPoint *pointStart, const CGuiPoint *
     CGuiPoint *result = new CGuiPoint;
     switch (dir) {
     case UP:
-        result->setY(y0 - penWidth() / 2, false);
+        result->setY(y0 - ceil((double)penWidth() / 2), false);
         result->setX(x0, false);
         break;
     case DOWN:
-        result->setY(y0 + penWidth() / 2, false);
+        result->setY(y0 + floor((double)penWidth() / 2), false);
         result->setX(x0, false);
         break;
     case LEFT:
-        result->setX(x0 = x0 - penWidth() / 2, false);
+        result->setX(x0 = x0 - ceil((double)penWidth() / 2), false);
         result->setY(y0, false);
         break;
     case RIGHT:
-        result->setX(x0 = x0 + penWidth() / 2, false);
+        result->setX(x0 = x0 + floor((double)penWidth() / 2), false);
         result->setY(y0, false);
         break;
     default:
