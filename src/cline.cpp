@@ -152,26 +152,43 @@ void CLine::paint(QPainter *painter) {
     QPainterPath path;
     path.moveTo(newStart->x() - x_, newStart->y() - y_);
 
-    if (!m_rounded) {
+    if (m_radius == 0) {
         for(int i = 1; i < m_points.count() - 1; i++)
             path.lineTo(m_points.at(i)->x() - x_, m_points.at(i)->y() - y_);
         path.lineTo(newEnd->x() - x_, newEnd->y() - y_);
     }
     else {
-        for(int i = 1; i <= m_points.count() - 1; i++) {
-            int centerStartX = ((m_points.at(i)->x() - x_) - (m_points.at(i - 1)->x() - x_)) / 2 + (m_points.at(i - 1)->x() - x_);
-            int centerStartY = ((m_points.at(i)->y() - y_) - (m_points.at(i - 1)->y() - y_)) / 2 + (m_points.at(i - 1)->y() - y_);
+        for(int i = 1; i < m_points.count() - 1; i++) {
+            {
+                int deltaX = (m_points.at(i)->x() - x_) - (m_points.at(i - 1)->x() - x_);
+                int deltaY = (m_points.at(i)->y() - y_) - (m_points.at(i - 1)->y() - y_);
 
-            if (i == 2)
-            path.cubicTo((m_points.at(i - 1)->x() - x_), (m_points.at(i - 1)->y() - y_),
-                         (m_points.at(i - 1)->x() - x_) / 2, (m_points.at(i - 1)->y() - y_) / 2,
-                         centerStartX, centerStartY);
-            else
-                path.lineTo(centerStartX, centerStartY);
+                int lineLength = sqrt(deltaX * deltaX + deltaY * deltaY);
+                int delta = lineLength / m_radius;
+
+                int newDeltaX = deltaX / delta;
+                int newDeltaY = deltaY / delta;
+
+                path.lineTo((m_points.at(i)->x() - x_) - newDeltaX, (m_points.at(i)->y() - y_) - newDeltaY);
+            }
+
+            {
+                int deltaX = (m_points.at(i)->x() - x_) - (m_points.at(i + 1)->x() - x_);
+                int deltaY = (m_points.at(i)->y() - y_) - (m_points.at(i + 1)->y() - y_);
+
+                int lineLength = sqrt(deltaX * deltaX + deltaY * deltaY);
+                int delta = lineLength / m_radius;
+
+                int newDeltaX = deltaX / delta;
+                int newDeltaY = deltaY / delta;
+
+                path.cubicTo(m_points.at(i)->x() - x_ , m_points.at(i)->y() - y_ ,
+                             m_points.at(i)->x() - x_ , m_points.at(i)->y() - y_ ,
+                             (m_points.at(i)->x() - x_) - newDeltaX, (m_points.at(i)->y() - y_) - newDeltaY);
+            }
         }
-        path.lineTo(newEnd->x() - x_, newEnd->y() - y_);
-//            path.cubicTo(m_points.at(i + 1)->x - x_,m_points.at(i + 1)->y - y_,);
 
+        path.lineTo(newEnd->x() - x_, newEnd->y() - y_);
     }
 
 

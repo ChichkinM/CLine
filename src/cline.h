@@ -32,7 +32,7 @@ class CLine : public CPainter
     Q_OBJECT
     Q_PROPERTY(QQmlListProperty<CGuiPoint> points READ points)
     Q_PROPERTY(int clipType READ clipType WRITE setClipType)
-    Q_PROPERTY(bool rounded READ rounded WRITE setRounded)
+    Q_PROPERTY(int radius READ radius WRITE setRadius)
 
 
 public:
@@ -51,8 +51,8 @@ public:
     void setClipType(int newClipType) { m_clipType = newClipType; }
     int clipType() { return m_clipType; }
 
-    void setRounded(bool newRounded) { m_rounded = newRounded; }
-    bool rounded() { return m_rounded; }
+    void setRadius(int newRadius) { m_radius = newRadius; }
+    int radius() { return m_radius; }
 
     static void registerComponents();
 
@@ -78,7 +78,7 @@ private:
     CGuiPoint *pointMinY_ = nullptr;
 
     int m_clipType = NO_CLIP;
-    bool m_rounded = false;
+    int m_radius = 0;
 
     bool pointSignalsIsConnectToSlots_ = false;
 
