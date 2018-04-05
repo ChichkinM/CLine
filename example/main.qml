@@ -31,7 +31,10 @@ Window {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: recOne.x += 1
+        onClicked: {
+            recOne.x += 1
+            lineWithRounded.rounded = !lineWithRounded.rounded
+        }
     }
 
     Rectangle {
@@ -201,15 +204,17 @@ Window {
 
 
     CLine {
+        id: lineWithRounded
         penWidth: 10
 
-        clipType: CLine.CLIP_RIGHT | CLine.CLIP_TOP | CLine.CLIP_BOTTOM
+        rounded: true
+        clipType: CLine.CLIP_RIGHT | CLine.CLIP_TOP /*| CLine.CLIP_BOTTOM*/
 
         points: [
-            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y + rectangle.height},
+            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y + rectangle.height * 0.75},
             CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.75 },
-            CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.25},
-            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y  }
+            CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.25}
+//            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y  }
         ]
     }
 }
