@@ -201,12 +201,14 @@ Window {
 
 
     CLine {
-        penWidth: 10
+        id: lineWithRounded
+        penWidth: 5
 
-        clipType: CLine.CLIP_RIGHT | CLine.CLIP_TOP | CLine.CLIP_BOTTOM
+        radius: 200
+        clipType: CLine.CLIP_RIGHT | CLine.CLIP_TOP /*| CLine.CLIP_BOTTOM*/
 
         points: [
-            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y + rectangle.height},
+            CPoint { x: rectangle.x + rectangle.width; y: rectangle.y + rectangle.height * 0.5},
             CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.75 },
             CPoint { x: rectangle.x + rectangle.width * 0.75; y: rectangle.y + rectangle.height * 0.25},
             CPoint { x: rectangle.x + rectangle.width; y: rectangle.y  }
