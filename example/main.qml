@@ -202,9 +202,9 @@ Window {
 
     CLine {
         id: lineWithRounded
-        penWidth: 10
+        penWidth: 5
 
-        radius: 150
+        radius: 200
         clipType: CLine.CLIP_RIGHT | CLine.CLIP_TOP /*| CLine.CLIP_BOTTOM*/
 
         points: [

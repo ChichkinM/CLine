@@ -1,4 +1,6 @@
 #include "cline.h"
+#include <QPoint>
+
 
 void CLine::registerComponents() {
     qmlRegisterType<CLine>("CLine", 1, 0, "CLine");
@@ -159,33 +161,29 @@ void CLine::paint(QPainter *painter) {
     }
     else {
         for(int i = 1; i < m_points.count() - 1; i++) {
+            auto calcRadiusPoint = [this](const CGuiPoint *pointStart, const CGuiPoint *pointEnd)->QPoint
             {
-                int deltaX = (m_points.at(i)->x() - x_) - (m_points.at(i - 1)->x() - x_);
-                int deltaY = (m_points.at(i)->y() - y_) - (m_points.at(i - 1)->y() - y_);
+                int deltaX = (pointEnd->x() - x_) - (pointStart->x() - x_);
+                int deltaY = (pointEnd->y() - y_) - (pointStart->y() - y_);
 
                 int lineLength = sqrt(deltaX * deltaX + deltaY * deltaY);
-                int delta = lineLength / m_radius;
+                double delta = (double)lineLength / m_radius;
 
-                int newDeltaX = deltaX / delta;
-                int newDeltaY = deltaY / delta;
+                QPoint result;
+                result.setX(deltaX / delta);
+                result.setY(deltaY / delta);
 
-                path.lineTo((m_points.at(i)->x() - x_) - newDeltaX, (m_points.at(i)->y() - y_) - newDeltaY);
-            }
+                return result;
+            };
 
-            {
-                int deltaX = (m_points.at(i)->x() - x_) - (m_points.at(i + 1)->x() - x_);
-                int deltaY = (m_points.at(i)->y() - y_) - (m_points.at(i + 1)->y() - y_);
+            QPoint p1, p2;
+            p1 = calcRadiusPoint(m_points.at(i - 1), m_points.at(i));
+            path.lineTo((m_points.at(i)->x() - x_) - p1.x(), (m_points.at(i)->y() - y_) - p1.y());
 
-                int lineLength = sqrt(deltaX * deltaX + deltaY * deltaY);
-                int delta = lineLength / m_radius;
-
-                int newDeltaX = deltaX / delta;
-                int newDeltaY = deltaY / delta;
-
-                path.cubicTo(m_points.at(i)->x() - x_ , m_points.at(i)->y() - y_ ,
-                             m_points.at(i)->x() - x_ , m_points.at(i)->y() - y_ ,
-                             (m_points.at(i)->x() - x_) - newDeltaX, (m_points.at(i)->y() - y_) - newDeltaY);
-            }
+            p2 = calcRadiusPoint(m_points.at(i + 1), m_points.at(i));
+            path.cubicTo(m_points.at(i)->x() - x_, m_points.at(i)->y() - y_,
+                         m_points.at(i)->x() - x_, m_points.at(i)->y() - y_,
+                         (m_points.at(i)->x() - x_) - p2.x(), (m_points.at(i)->y() - y_) - p2.y());
         }
 
         path.lineTo(newEnd->x() - x_, newEnd->y() - y_);
