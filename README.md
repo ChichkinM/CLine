@@ -1,3 +1,5 @@
+![alt text](https://github.com/ChichkinM/CLine/blob/readme/Logo.png)
+
 # CLine
 Component for drawing a line point by point.
 
