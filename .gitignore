@@ -1,7 +1,8 @@
 *.o
 moc*
-*.user
+*.user*
 qrc_qml.cpp
 *.stash
 Makefile
 QmlCustomLine
+build*
