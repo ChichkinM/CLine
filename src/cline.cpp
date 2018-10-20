@@ -2,6 +2,10 @@
 #include <QPoint>
 
 
+CLine::CLine() : CPainter() {
+    updateSize();
+}
+
 void CLine::registerComponents() {
     qmlRegisterType<CLine>("CLine", 1, 0, "CLine");
     qmlRegisterType<CGuiPoint>("CPoint", 1, 0, "CPoint");
@@ -144,6 +148,27 @@ void CLine::resize() {
     resizeByPoints();
 }
 
+void CLine::mousePressEvent(QMouseEvent *event) {
+    if (m_clickable)
+        for (int i = 0; i < path.elementCount() - 1; i++) {
+            QPoint p1(path.elementAt(i).x, path.elementAt(i).y);
+            QPoint p2(path.elementAt(i + 1).x, path.elementAt(i + 1).y);
+            QPointF addition = QPoint((10 + penWidth() / 2),
+                                      (10 + penWidth() / 2));
+
+            QPolygonF poly;
+            poly << p1 - addition + this->position()
+                 << p2 - addition + this->position()
+                 << p2 + addition + this->position()
+                 << p1 + addition + this->position();
+
+            if (poly.containsPoint(event->windowPos(), Qt::OddEvenFill)) {
+                emit clicked();
+                break;
+            }
+        }
+}
+
 void CLine::paint(QPainter *painter) {
     if (!pointSignalsIsConnectToSlots_)
         resize();
@@ -151,9 +176,8 @@ void CLine::paint(QPainter *painter) {
     CGuiPoint *newStart = correctPosition(m_points.at(0), m_points.at(1));
     CGuiPoint *newEnd = correctPosition(m_points.at(m_points.count() - 1), m_points.at(m_points.count() - 2));
 
-    QPainterPath path;
+    path = QPainterPath();
     path.moveTo(newStart->x() - x_, newStart->y() - y_);
-
     if (m_radius == 0) {
         for(int i = 1; i < m_points.count() - 1; i++)
             path.lineTo(m_points.at(i)->x() - x_, m_points.at(i)->y() - y_);
@@ -188,7 +212,6 @@ void CLine::paint(QPainter *painter) {
 
         path.lineTo(newEnd->x() - x_, newEnd->y() - y_);
     }
-
 
     painter->setPen(*pen_);
     painter->drawPath(path);

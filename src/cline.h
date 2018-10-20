@@ -33,13 +33,15 @@ class CLine : public CPainter
     Q_PROPERTY(QQmlListProperty<CGuiPoint> points READ points)
     Q_PROPERTY(int clipType READ clipType WRITE setClipType)
     Q_PROPERTY(int radius READ radius WRITE setRadius)
+    Q_PROPERTY(bool clickable READ clickable WRITE setClickable)
 
 
 public:
-    CLine() : CPainter() { updateSize(); }
+    CLine();
     ~CLine() { }
 
-    void paint(QPainter *painter);
+    void  mousePressEvent (QMouseEvent *event) override;
+    void paint(QPainter *painter) override;
 
     QQmlListProperty<CGuiPoint> points();
     int pointsCount() const;
@@ -48,11 +50,13 @@ public:
     enum ClipType { NO_CLIP = 1, CLIP_TOP = 2, CLIP_BOTTOM = 4, CLIP_RIGHT = 8, CLIP_LEFT = 16 };
     Q_ENUMS(ClipType)
 
-    void setClipType(int newClipType) { m_clipType = newClipType; }
-    int clipType() { return m_clipType; }
+    void setClipType(int newClipType)   { m_clipType = newClipType; }
+    void setClickable(bool clickable)   { m_clickable = clickable; }
+    void setRadius(int newRadius)       { m_radius = newRadius; }
 
-    void setRadius(int newRadius) { m_radius = newRadius; }
-    int radius() { return m_radius; }
+    int radius()        { return m_radius; }
+    bool clickable()    { return m_clickable; }
+    int clipType()      { return m_clipType; }
 
     static void registerComponents();
 
@@ -79,14 +83,23 @@ private:
 
     int m_clipType = NO_CLIP;
     int m_radius = 0;
+    bool m_clickable = true;
 
     bool pointSignalsIsConnectToSlots_ = false;
 
     void resizeByPoints();
     void setPointsForResize();
 
+    QPainterPath path;
+
+
 private slots:    
     void resize();
+
+signals:
+    //TODO: мб возможно получить готовые сигналы действия мыши не прописывая в ручную их
+    void clicked();
+
 };
 
 #endif // CLINE_H

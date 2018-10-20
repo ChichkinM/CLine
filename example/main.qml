@@ -98,9 +98,9 @@ Window {
 
 
 
-    CLine {
+    MyBaseLine {
         id: lineOne
-        color: "black"
+        myColor: "black"
         penWidth: 10
 
         clipType: CLine.CLIP_LEFT | CLine.CLIP_TOP | CLine.CLIP_BOTTOM
@@ -111,8 +111,8 @@ Window {
         ]
     }
 
-    CLine {
-        color: "black"
+    MyBaseLine {
+        myColor: "black"
         penWidth: 10
 
         points: [
@@ -123,10 +123,8 @@ Window {
     }
 
 
-
-    CLine {
-        color: "lightblue"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightblue"
 
         clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
@@ -136,9 +134,8 @@ Window {
         ]
     }
 
-    CLine {
-        color: "lightblue"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightblue"
 
         clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
@@ -148,9 +145,8 @@ Window {
         ]
     }
 
-    CLine {
-        color: "lightblue"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightblue"
 
         clipType: CLine.CLIP_LEFT | CLine.CLIP_RIGHT
 
@@ -162,9 +158,8 @@ Window {
 
 
 
-    CLine {
-        color: "lightcoral"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightcoral"
 
         clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
@@ -174,9 +169,8 @@ Window {
         ]
     }
 
-    CLine {
-        color: "lightcoral"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightcoral"
 
         clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
@@ -186,9 +180,8 @@ Window {
         ]
     }
 
-    CLine {
-        color: "lightcoral"
-        penWidth: 15
+    MyBaseLine {
+        myColor: "lightcoral"
 
         clipType: CLine.CLIP_BOTTOM | CLine.CLIP_TOP
 
@@ -200,7 +193,7 @@ Window {
 
 
 
-    CLine {
+    MyBaseLine {
         id: lineWithRounded
         penWidth: 5
 

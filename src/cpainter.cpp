@@ -10,6 +10,7 @@ CPainter::CPainter(QQuickPaintedItem *parent) :
     setFlag(QQuickPaintedItem::ItemHasContents, true);
 
     setAntialiasing(true);
+    setAcceptedMouseButtons(Qt::AllButtons );
 }
 
 
