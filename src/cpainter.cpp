@@ -8,6 +8,8 @@ CPainter::CPainter(QQuickPaintedItem *parent) :
     pen_ = new QPen();
     pen_->setJoinStyle(Qt::MiterJoin);
     setFlag(QQuickPaintedItem::ItemHasContents, true);
+
+    setAntialiasing(true);
 }
 
 

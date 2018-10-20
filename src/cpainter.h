@@ -15,6 +15,7 @@ class CPainter : public QQuickPaintedItem
     Q_PROPERTY(int penWidth READ penWidth WRITE setPenWidth NOTIFY penWidthChanged)
     Q_PROPERTY(Qt::PenStyle style READ style WRITE setStyle NOTIFY styleChanged)
     Q_PROPERTY(double scale READ scale WRITE setScale NOTIFY scaleChanged)
+    Q_PROPERTY(bool antialiasing READ antialiasing WRITE setAntialiasing)
 
 public:
     CPainter(QQuickPaintedItem *parent = 0);
@@ -46,7 +47,6 @@ protected:
     Qt::PenStyle m_penStyle;
     double m_scale;
     QPen *pen_;
-
 
 };
 
