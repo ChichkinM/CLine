@@ -83,7 +83,7 @@ private:
 
     int m_clipType = NO_CLIP;
     int m_radius = 0;
-    bool m_clickable = true;
+    bool m_clickable = false;
 
     bool pointSignalsIsConnectToSlots_ = false;
 
